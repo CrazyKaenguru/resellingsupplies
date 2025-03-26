@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Schlüsselanhänger für Vintage Reseller</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .hero {
+            background: url('DSCF5223.JPG') center/cover;
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+        }
+        .container {
+            max-width: 800px;
+        }
+        .price-box {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .btn-primary {
+            background-color: #343a40;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #212529;
+        }
+    </style>
+    <script>
+        function calculatePrice() {
+            let length = document.getElementById("text").value.length;
+            let quantity = parseInt(document.getElementById("quantity").value);
+            let prices = {3: 0.50, 4: 0.60, 5: 0.70, 6: 0.80, 7: 0.90, 8: 1.00, 9: 1.10, 10: 1.20};
+            let pricePerItem = prices[length] || 1.20;
+            let total = pricePerItem * quantity;
+            if (quantity >= 100) total *= 0.85;
+            else if (quantity >= 50) total *= 0.90;
+            else if (quantity >= 20) total *= 0.95;
+            document.getElementById("totalPrice").innerText = total.toFixed(2) + " €";
+        }
+
+        function sendOrder() {
+            let text = document.getElementById("text").value;
+            let quantity = document.getElementById("quantity").value;
+            let totalPrice = document.getElementById("totalPrice").innerText;
+            let webhookURL = "DEIN_DISCORD_WEBHOOK";
+            let payload = { content: `Neue Bestellung: ${text}, Menge: ${quantity}, Preis: ${totalPrice}` };
+            fetch(webhookURL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+            alert("Bestellung gesendet!");
+        }
+    </script>
+</head>
+<body>
+    <div class="hero text-center">
+        <h1>Schlüsselanhänger für Vintage Reseller</h1>
+    </div>
+    <div class="container text-center my-5">
+        <p class="lead">Personalisierte Anhänger für dein Business</p>
+        <div class="row g-3">
+            <div class="col-md-6">
+                <img src="DSCF5223.JPG" class="img-fluid rounded shadow" alt="Schlüsselanhänger 1">
+            </div>
+            <div class="col-md-6">
+                <img src="DSCF5238.JPG" class="img-fluid rounded shadow" alt="Schlüsselanhänger 2">
+            </div>
+        </div>
+    </div>
+    <div class="container my-5">
+        <div class="price-box text-center">
+            <h2>Bestellung</h2>
+            <label for="text" class="form-label">Schlüsselanhänger-Text (max. 10 Buchstaben):</label>
+            <input type="text" id="text" class="form-control text-center" maxlength="10" oninput="calculatePrice()">
+            <label for="quantity" class="form-label mt-3">Menge:</label>
+            <input type="number" id="quantity" class="form-control text-center" min="1" value="1" oninput="calculatePrice()">
+            <h3 class="mt-3">Preis: <span id="totalPrice">0,50 €</span></h3>
+            <button class="btn btn-primary mt-3 w-100" onclick="sendOrder()">Bestellen</button>
+        </div>
+    </div>
+</body>
+</html>
