@@ -39,6 +39,16 @@
         .btn-primary:hover {
             background-color: #212529;
         }
+        .footer {
+            background-color: #343a40;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        .footer a {
+            color: #fff;
+            text-decoration: none;
+        }
     </style>
     <script>
     function berechnePreis(buchstaben, stueckzahl) {
@@ -98,6 +108,7 @@
         const telefon = document.querySelector('input[type="tel"]').value;
         const name = document.querySelector('input[type="text"]').value;
         const adresse = document.querySelector('textarea').value;
+        const farbe = document.getElementById("colorSelect").value;
 
         // Überprüfen, ob alle Felder ausgefüllt sind
         if (!buchstaben || !stueckzahl || !email || !telefon || !name || !adresse) {
@@ -116,7 +127,8 @@
         **E-Mail:** ${email}\n
         **Telefonnummer:** ${telefon}\n
         **Name:** ${name}\n
-        **Adresse:** ${adresse}`
+        **Adresse:** ${adresse}\n
+        **Farbe:** ${farbe}`
     };
 
         // Sende die Anfrage an den Discord Webhook
@@ -145,37 +157,27 @@
     <div class="hero text-center">
         Reselling-Supplies
     </div>
-    <div class="container  my-5">
+    <div class="container my-5">
         <p class="lead">Personalisierte Anhänger für deinen Shop</p>
         <div class="info-box">
-            <h2 class="mb-4">Personalisierte Schlüsselanhänger für deinen Shop</h2>
-            
-            <!-- Vorteile und Verwendungszweck -->
+            <h2 class="mb-4">Personalisierte Anhänger für deinen Shop</h2>
             <div class="alert alert-info mt-4">
-                <h4 class="fw-bold">Warum du diese Schlüsselanhänger brauchst</h4>
+                <h4 class="fw-bold">Warum du diese Anhänger brauchst</h4>
                 <ul>
                     <li><strong>Mehr Kundenzufriedenheit:</strong> Als kostenlose Beigabe vermitteln die Anhänger ein exklusives Premium-Gefühl.</li>
                     <li><strong>Steigerung der Bewertungen:</strong> Zufriedene Kunden hinterlassen häufiger positive Bewertungen und Empfehlungen.</li>
-                    <li><strong>Förderung von Weiterempfehlungen:</strong> Ein persönlicher Schlüsselanhänger motiviert deine Kunden, deinen Shop weiterzuempfehlen.</li>
+                    <li><strong>Förderung von Weiterempfehlungen:</strong> Ein persönlicher Anhänger motiviert deine Kunden, deinen Shop weiterzuempfehlen.</li>
                 </ul>
             </div>
-        
-            <!-- Produktbeschreibung als Stichpunkte -->
-            <p class="lead">Unsere Schlüsselanhänger bieten viele Vorteile für deinen Shop:</p>
+            <p class="lead">Unsere Anhänger bieten viele Vorteile für deinen Shop:</p>
             <ul>
                 <li><strong>Hochwertiges Material:</strong> Langlebiges PLA für eine umweltfreundliche Wahl.</li>
                 <li><strong>Individuell gefertigt:</strong> Jeder Anhänger wird speziell für deinen Shop designt und produziert.</li>
                 <li><strong>Verschiedene Längen:</strong> Die Anhänger sind in verschiedenen Größen erhältlich, passend für jedes Design.</li>
                 <li><strong>Einzigartiges Design:</strong> Jeder Anhänger bietet ein einzigartiges, personalisiertes Erlebnis für deine Kunden.</li>
             </ul>
-        
-            <!-- Hinweis -->
             <p><strong>Hinweis:</strong> Diese Anhänger sind als kleines Extra gedacht, das du deinen Kunden beilegst. Sie steigern nicht nur die Wahrnehmung deines Shops, sondern stärken auch die Kundenbindung.</p>
         </div>
-        
-        
-        
-        
         <div class="row g-3">
             <div class="col-md-6">
                 <img src="DSCF5223.JPG" class="img-fluid rounded shadow" alt="Schlüsselanhänger 1">
@@ -210,11 +212,33 @@
                 <input type="tel" class="form-control mb-2" placeholder="Telefonnummer" required>
                 <input type="text" class="form-control mb-2" placeholder="Name" required>
                 <textarea class="form-control mb-2" placeholder="Adresse" required></textarea>
-                <h3 class="mt-3">≈<span id="totalPrice">0,50 €</span></h3>
-                <p>Nach der Anfrage erhältst du schnellstmöglich ein unverbindliches Angebot per E-Mail, inklusive Bilder des gewünschten Designs.</p>
+                
+                <!-- Farbauswahl hinzufügen -->
+                <select id="colorSelect" class="form-control mb-2">
+                    <option value="schwarz">Schwarz</option>
+                    <option value="weiß">Weiß</option>
+                </select>
+
+                <h3 class="mt-3">≈<span id="totalPrice">0,50 €</span> +Versandkosten(meist 1,80€)</h3>
+                <p>Nach der Anfrage erhältst du schnellstmöglich ein Angebot per E-Mail, inklusive Bilder des gewünschten Designs. Somit kannst du das Design auch noch verändern lassen, bis es dir gefällt.</p>
                 <button class="btn btn-primary w-100 mt-3" type="submit">Anfrage senden</button>
             </form>
         </div>
+    </div>
+    <div class="footer">
+        <p>&copy; 2025 Reselling Supplies. Alle Rechte vorbehalten.</p>
+        <p>
+            <strong>Kontakt:</strong><br>
+            E-Mail: <a href="mailto:kontakt@resellingsupplies.de">kontakt@resellingsupplies.de</a><br>
+            Telefon: +49 01575 8557469
+        </p>
+        <p>
+            <strong>Impressum:</strong><br>
+            Quirin Brauer<br>
+            Pfarrer-Dr.-Zeiller-Str.18, 85567 Grafing bei München<br>
+            Geschäftsführer: Quirin Brauer<br>
+            E-Mail: <a href="mailto:kontakt@resellingsupplies.de">quirin.brauer.business@proton.me</a><br>
+        </p>
     </div>
 </body>
 </html>
