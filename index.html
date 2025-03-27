@@ -16,7 +16,7 @@
     }
 
     .hero {
-  background: url('DSCF5223.png') center/cover no-repeat fixed;
+  background: url('DSCF5223.png') center/contain no-repeat black; 
   height: 100vh;
   display: flex;
   align-items: center;
@@ -28,13 +28,22 @@
   position: relative;
 }
 
+/* Verdunkelung */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
 
-    .hero::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.6);
-    }
+/* Spezielle Anpassung für mobile Geräte */
+@media (max-width: 768px) {
+  .hero {
+    background: url('DSCF5223.png') center/contain no-repeat black;
+    background-attachment: scroll; /* Verhindert "fixed"-Verhalten auf Mobile */
+  }
+}
+
 
     h2, h3 {
       color: white !important;
