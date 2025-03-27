@@ -12,7 +12,7 @@
       font-family: Arial, sans-serif;
     }
     .hero {
-      background: url('DSCF5223.png') center/cover fixed;
+      background: url('DSCF5223.png') center/contain no-repeat black;
       height: 100vh;
       display: flex;
       align-items: center;
@@ -50,137 +50,18 @@
       text-decoration: none;
     }
   </style>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y1R74DQL8Z"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-Y1R74DQL8Z');
-  </script>
-  <script>
-    function berechnePreis(buchstaben, stueckzahl) {
-      let stueckPreis;
-      // Preis pro Stück abhängig von der Anzahl der Buchstaben
-      switch (buchstaben) {
-        case 3: stueckPreis = 0.50; break;
-        case 4: stueckPreis = 0.60; break;
-        case 5: stueckPreis = 0.70; break;
-        case 6: stueckPreis = 0.80; break;
-        case 7: stueckPreis = 0.90; break;
-        case 8: stueckPreis = 1.00; break;
-        case 9: stueckPreis = 1.10; break;
-        case 10: stueckPreis = 1.20; break;
-        default:
-          alert("Ungültige Anzahl von Buchstaben. Bitte 3 bis 10 Buchstaben angeben.");
-          return;
-      }
-      // Basispreis berechnen
-      let gesamtPreis = stueckPreis * stueckzahl;
-      // Mengenrabatt ermitteln
-      let rabatt = 0;
-      if (stueckzahl >= 20 && stueckzahl <= 49) {
-        rabatt = 0.05;
-      } else if (stueckzahl >= 50 && stueckzahl <= 99) {
-        rabatt = 0.10;
-      } else if (stueckzahl >= 100) {
-        rabatt = 0.15;
-      }
-      // Rabatt anwenden
-      gesamtPreis = gesamtPreis * (1 - rabatt);
-      return gesamtPreis.toFixed(2); // Preis als String mit zwei Nachkommastellen
-    }
-
-    function calculatePrice() {
-      const buchstaben = parseInt(document.getElementById("text").value);
-      const stueckzahl = parseInt(document.getElementById("quantity").value);
-      if (isNaN(buchstaben) || isNaN(stueckzahl)) {
-        document.getElementById("totalPrice").innerText = "0,00 €";
-        return;
-      }
-      const gesamtPreis = berechnePreis(buchstaben, stueckzahl);
-      document.getElementById("totalPrice").innerText = `${gesamtPreis} €`;
-    }
-
-    function validateFormAndSend() {
-      const buchstaben = document.getElementById("text").value;
-      const stueckzahl = document.getElementById("quantity").value;
-      const email = document.querySelector('input[type="email"]').value;
-      const telefon = document.querySelector('input[type="tel"]').value;
-      const name = document.querySelector('input[type="text"]').value;
-      const adresse = document.querySelector('textarea').value;
-      const farbe = document.getElementById("colorSelect").value;
-      const promoCode = document.getElementById("promoCode").value;
-
-      // Überprüfen, ob alle Felder ausgefüllt sind
-      if (!buchstaben || !stueckzahl || !email || !telefon || !name || !adresse) {
-        alert("Bitte fülle alle Felder aus.");
-        return;
-      }
-
-      // Discord Webhook URL (hier muss dein Webhook-Link eingefügt werden)
-      const webhookUrl = "https://discord.com/api/webhooks/1354423390932439222/OuShu0T7n3lBG6B1zAJYPFrqJoN_0Y0VbsFi5kt7E2EJcKnj8Prnu4nd3ZeWdooSR5Ie";
-
-      // Erstelle das Nachrichtentext inklusive Promo-Code
-      const message = {
-        content: `**Neue Anfrage für personalisierte Schlüsselanhänger**\n
-**Buchstaben:** ${buchstaben}\n
-**Menge:** ${stueckzahl}\n
-**E-Mail:** ${email}\n
-**Telefonnummer:** ${telefon}\n
-**Name:** ${name}\n
-**Adresse:** ${adresse}\n
-**Farbe:** ${farbe}\n
-**Promo-Code:** ${promoCode || "Keiner angegeben"}`
-      };
-
-      // Sende die Anfrage an den Discord-Webhook
-      fetch(webhookUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(message)
-      })
-      .then(response => {
-        if (response.ok) {
-          alert("Deine Anfrage wurde erfolgreich gesendet!");
-          document.querySelector('form').reset();
-        } else {
-          alert("Es gab ein Problem beim Senden der Anfrage.");
-        }
-      })
-      .catch(error => {
-        alert("Es gab einen Fehler: " + error);
-      });
-    }
-  </script>
 </head>
 <body>
-  <div class="hero text-center d-flex align-items-center" style="height: 100vh; padding-top: 0;">
-    
+
+  <!-- Hero-Bereich -->
+  <div class="hero text-center">
+   
   </div>
+
   <div class="container my-5">
     <p class="lead">Personalisierte Anhänger für deinen Shop</p>
-    <div class="info-box">
-      <h2 class="mb-4">Personalisierte Anhänger für deinen Shop</h2>
-      <div class="alert alert-info mt-4">
-        <h4 class="fw-bold">Warum du diese Anhänger brauchst</h4>
-        <ul>
-          <li><strong>Mehr Kundenzufriedenheit:</strong> Als kostenlose Beigabe vermitteln die Anhänger ein exklusives Premium-Gefühl.</li>
-          <li><strong>Steigerung der Bewertungen:</strong> Zufriedene Kunden hinterlassen häufiger positive Bewertungen.</li>
-          <li><strong>Förderung von Weiterempfehlungen:</strong> Ein persönlicher Anhänger motiviert deine Kunden, deinen Shop weiterzuempfehlen.</li>
-        </ul>
-      </div>
-      <p class="lead">Unsere Anhänger bieten viele Vorteile für deinen Shop:</p>
-      <ul>
-        <li><strong>Hochwertiges Material:</strong> Langlebiges PLA für eine umweltfreundliche Wahl.</li>
-        <li><strong>Individuell gefertigt:</strong> Jeder Anhänger wird speziell für deinen Shop designt und produziert.</li>
-        <li><strong>Verschiedene Längen:</strong> Die Anhänger sind in verschiedenen Größen erhältlich, passend für jedes Design.</li>
-        <li><strong>Einzigartiges Design:</strong> Jeder Anhänger bietet ein einzigartiges, personalisiertes Erlebnis für deine Kunden.</li>
-      </ul>
-      <p><strong>Hinweis:</strong> Diese Anhänger sind als kleines Extra gedacht, das du deinen Kunden beilegst. Sie steigern nicht nur die Wahrnehmung deines Shops, sondern stärken auch die Kundenbindung.</p>
-    </div>
+
+    <!-- Bild-Galerie -->
     <div class="row g-3">
       <div class="col-md-6">
         <img src="DSCF5223.png" class="img-fluid rounded shadow" alt="Schlüsselanhänger 1">
@@ -189,8 +70,18 @@
         <img src="DSCF5238.JPG" class="img-fluid rounded shadow" alt="Schlüsselanhänger 2">
       </div>
     </div>
+    <div class="row g-3 mt-3">
+      <div class="col-md-6">
+        <img src="mmvleather.jpg" class="img-fluid rounded shadow" alt="Schlüsselanhänger 3">
+      </div>
+      <div class="col-md-6">
+        <img src="rkvintage.JPG" class="img-fluid rounded shadow" alt="Schlüsselanhänger 4">
+      </div>
+    </div>
   </div>
+
   <div class="container my-5">
+    <!-- Preistabelle -->
     <div class="price-box text-center">
       <h2>Preisliste</h2>
       <p>🔹 3 Buchstaben – 0,50 € / Stück</p>
@@ -206,75 +97,73 @@
       <p>✅ 50 - 99 Stück → 10% Rabatt</p>
       <p>✅ 100+ Stück → 15% Rabatt</p>
     </div>
+
+    <!-- Bestellformular -->
     <div class="price-box text-center">
       <h2>Bestellung</h2>
       <form onsubmit="event.preventDefault(); validateFormAndSend();">
-        <input type="text" id="text" class="form-control mb-2" placeholder="Gewünschte Buchstaben (max. 10)" maxlength="10" oninput="calculatePrice()">
-        <input type="number" id="quantity" class="form-control mb-2" placeholder="Menge" min="1" oninput="calculatePrice()">
+        <input type="text" id="text" class="form-control mb-2" placeholder="Gewünschte Buchstaben (max. 10)" maxlength="10">
+        <input type="number" id="quantity" class="form-control mb-2" placeholder="Menge" min="1">
         <input type="email" class="form-control mb-2" placeholder="E-Mail" required>
         <input type="tel" class="form-control mb-2" placeholder="Telefonnummer" required>
         <input type="text" class="form-control mb-2" placeholder="Name" required>
         <textarea class="form-control mb-2" placeholder="Adresse" required></textarea>
-        
-        <!-- Farbauswahl hinzufügen -->
         <select id="colorSelect" class="form-control mb-2">
           <option value="" disabled selected>Farbe</option>
           <option value="schwarz">Schwarz</option>
           <option value="weiß">Weiß</option>
         </select>
-        
-        <!-- Promo-Code Feld --> 
         <input type="text" class="form-control mb-2" placeholder="Promo-Code (falls vorhanden)" id="promoCode">
-        <p class="text-muted">Falls du einen Promo-Code hast, gib ihn hier ein. Der Rabatt wird erst im Angebot, das du per E-Mail erhältst, einberechnet.</p>
-        
-        <h3 class="mt-3">≈<span id="totalPrice">0,50 €</span> +Versandkosten (meist 1,80€)</h3>
-        <p>Nach der Anfrage erhältst du schnellstmöglich ein Angebot per E-Mail, inklusive Bilder des gewünschten Designs. Somit kannst du das Design auch noch verändern lassen, bis es dir gefällt.</p>
+        <textarea class="form-control mb-2" placeholder="Anmerkungen (optional)" id="remarks"></textarea>
         <button class="btn btn-primary w-100 mt-3" type="submit">Anfrage senden</button>
       </form>
     </div>
   </div>
+
+  <!-- Footer -->
   <div class="footer">
     <p>&copy; 2025 Reselling Supplies. Alle Rechte vorbehalten.</p>
-    <p>
-      <strong>Kontakt:</strong><br>
+    <p><strong>Kontakt:</strong><br>
       E-Mail: <a href="mailto:quirin.brauer.business@proton.me">quirin.brauer.business@proton.me</a><br>
-      Telefon: +49 01575 8557469
-    </p>
-    <p>
-      <strong>Impressum:</strong><br>
-      Quirin Brauer<br>
-      Pfarrer-Dr.-Zeiller-Str.18, 85567 Grafing bei München<br>
-      Geschäftsführer: Quirin Brauer<br>
-      E-Mail: <a href="mailto:quirin.brauer.business@proton.me">quirin.brauer.business@proton.me</a><br>
+      Telefon: +49 1575 8557469
     </p>
   </div>
-  <style>
-    .hero {
-      background: url('DSCF5223.png') center/cover fixed;
-      height: 100vh;
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      color: white;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
-      font-size: 3rem;
-      font-weight: bold;
+
+  <script>
+    function validateFormAndSend() {
+      const buchstaben = document.getElementById("text").value;
+      const stueckzahl = document.getElementById("quantity").value;
+      const email = document.querySelector('input[type="email"]').value;
+      const telefon = document.querySelector('input[type="tel"]').value;
+      const name = document.querySelector('input[type="text"]').value;
+      const adresse = document.querySelector('textarea').value;
+      const farbe = document.getElementById("colorSelect").value;
+      const promoCode = document.getElementById("promoCode").value;
+      const anmerkungen = document.getElementById("remarks").value;
+
+      if (!buchstaben || !stueckzahl || !email || !telefon || !name || !adresse) {
+        alert("Bitte fülle alle Felder aus.");
+        return;
+      }
+
+      const webhookUrl = "DEIN_DISCORD_WEBHOOK_URL";
+      const message = {
+        content: `**Neue Anfrage für personalisierte Schlüsselanhänger**\n
+**Buchstaben:** ${buchstaben}\n
+**Menge:** ${stueckzahl}\n
+**E-Mail:** ${email}\n
+**Telefonnummer:** ${telefon}\n
+**Name:** ${name}\n
+**Adresse:** ${adresse}\n
+**Farbe:** ${farbe}\n
+**Promo-Code:** ${promoCode || "Keiner"}\n
+**Anmerkungen:** ${anmerkungen || "Keine"}`
+      };
+
+      fetch(webhookUrl, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(message) })
+        .then(response => response.ok ? alert("Anfrage gesendet!") : alert("Fehler beim Senden."));
     }
-    .info-box {
-      background: rgba(255, 255, 255, 0.8);
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      max-width: 800px;
-      margin: auto;
-    }
-    .btn-primary {
-      background-color: #d8a900;
-      border: none;
-    }
-    .btn-primary:hover {
-      background-color: #b98f00;
-    }
-  </style>
+  </script>
+
 </body>
 </html>
