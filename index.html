@@ -29,7 +29,7 @@
       background: #fff;
       padding: 20px;
       border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       margin-bottom: 20px;
     }
     .btn-primary {
@@ -88,7 +88,7 @@
       }
       // Rabatt anwenden
       gesamtPreis = gesamtPreis * (1 - rabatt);
-      return gesamtPreis.toFixed(2);
+      return gesamtPreis.toFixed(2); // Preis als String mit zwei Nachkommastellen
     }
 
     function calculatePrice() {
@@ -118,7 +118,7 @@
         return;
       }
 
-      // Ersetze DEIN_DISCORD_WEBHOOK_URL durch deinen tatsächlichen Webhook-Link
+      // Ersetze den folgenden Webhook-Link mit deinem tatsächlichen Discord-Webhook
       const webhookUrl = "https://discord.com/api/webhooks/1354423390932439222/OuShu0T7n3lBG6B1zAJYPFrqJoN_0Y0VbsFi5kt7E2EJcKnj8Prnu4nd3ZeWdooSR5Ie";
       const message = {
         content: `**Neue Anfrage für personalisierte Schlüsselanhänger**\n
@@ -129,7 +129,7 @@
 **Name:** ${name}\n
 **Adresse:** ${adresse}\n
 **Farbe:** ${farbe}\n
-**Promo-Code:** ${promoCode || "Keiner"}\n
+**Promo-Code:** ${promoCode || "Keiner angegeben"}\n
 **Anmerkungen:** ${anmerkungen || "Keine"}`
       };
 
@@ -159,9 +159,28 @@
   </div>
 
   <div class="container my-5">
-    <p class="lead">Personalisierte Anhänger für deinen Shop</p>
+    <!-- Produktinfo -->
+    <div class="info-box">
+      <h2 class="mb-4">Personalisierte Anhänger für deinen Shop</h2>
+      <div class="alert alert-info mt-4">
+        <h4 class="fw-bold">Warum du diese Anhänger brauchst</h4>
+        <ul>
+          <li><strong>Mehr Kundenzufriedenheit:</strong> Als kostenlose Beigabe vermitteln die Anhänger ein exklusives Premium-Gefühl.</li>
+          <li><strong>Steigerung der Bewertungen:</strong> Zufriedene Kunden hinterlassen häufiger positive Bewertungen.</li>
+          <li><strong>Förderung von Weiterempfehlungen:</strong> Ein persönlicher Anhänger motiviert deine Kunden, deinen Shop weiterzuempfehlen.</li>
+        </ul>
+      </div>
+      <p class="lead">Unsere Anhänger bieten viele Vorteile für deinen Shop:</p>
+      <ul>
+        <li><strong>Hochwertiges Material:</strong> Langlebiges PLA für eine umweltfreundliche Wahl.</li>
+        <li><strong>Individuell gefertigt:</strong> Jeder Anhänger wird speziell für deinen Shop designt und produziert.</li>
+        <li><strong>Verschiedene Längen:</strong> Die Anhänger sind in verschiedenen Größen erhältlich, passend für jedes Design.</li>
+        <li><strong>Einzigartiges Design:</strong> Jeder Anhänger bietet ein einzigartiges, personalisiertes Erlebnis für deine Kunden.</li>
+      </ul>
+      <p><strong>Hinweis:</strong> Diese Anhänger sind als kleines Extra gedacht, das du deinen Kunden beilegst. Sie steigern nicht nur die Wahrnehmung deines Shops, sondern stärken auch die Kundenbindung.</p>
+    </div>
 
-    <!-- Bild-Galerie: Zwei Reihen, je zwei Bilder -->
+    <!-- Bild-Galerie: 4 Bilder in 2 Reihen zu je 2 Bildern -->
     <div class="row g-3">
       <div class="col-md-6">
         <img src="DSCF5223.png" class="img-fluid rounded shadow" alt="Schlüsselanhänger 1">
@@ -237,5 +256,55 @@
       E-Mail: <a href="mailto:quirin.brauer.business@proton.me">quirin.brauer.business@proton.me</a><br>
     </p>
   </div>
+
+  <script>
+    function validateFormAndSend() {
+      const buchstaben = document.getElementById("text").value;
+      const stueckzahl = document.getElementById("quantity").value;
+      const email = document.querySelector('input[type="email"]').value;
+      const telefon = document.querySelector('input[type="tel"]').value;
+      const name = document.querySelector('input[type="text"]').value;
+      const adresse = document.querySelector('textarea').value;
+      const farbe = document.getElementById("colorSelect").value;
+      const promoCode = document.getElementById("promoCode").value;
+      const anmerkungen = document.getElementById("remarks").value;
+
+      if (!buchstaben || !stueckzahl || !email || !telefon || !name || !adresse) {
+        alert("Bitte fülle alle Felder aus.");
+        return;
+      }
+
+      const webhookUrl = "https://discord.com/api/webhooks/1354423390932439222/OuShu0T7n3lBG6B1zAJYPFrqJoN_0Y0VbsFi5kt7E2EJcKnj8Prnu4nd3ZeWdooSR5Ie";
+      const message = {
+        content: `**Neue Anfrage für personalisierte Schlüsselanhänger**\n
+**Buchstaben:** ${buchstaben}\n
+**Menge:** ${stueckzahl}\n
+**E-Mail:** ${email}\n
+**Telefonnummer:** ${telefon}\n
+**Name:** ${name}\n
+**Adresse:** ${adresse}\n
+**Farbe:** ${farbe}\n
+**Promo-Code:** ${promoCode || "Keiner angegeben"}\n
+**Anmerkungen:** ${anmerkungen || "Keine"}`
+      };
+
+      fetch(webhookUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(message)
+      })
+      .then(response => {
+        if (response.ok) {
+          alert("Deine Anfrage wurde erfolgreich gesendet!");
+          document.querySelector('form').reset();
+        } else {
+          alert("Es gab ein Problem beim Senden der Anfrage.");
+        }
+      })
+      .catch(error => {
+        alert("Es gab einen Fehler: " + error);
+      });
+    }
+  </script>
 </body>
 </html>
